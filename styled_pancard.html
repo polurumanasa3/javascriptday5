@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Styled PAN Card</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f4f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .pan-card {
+            background: linear-gradient(135deg, #4a90e2, #50e3c2);
+            width: 350px;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            color: white;
+            text-align: center;
+        }
+        .pan-card h1 {
+            margin-bottom: 20px;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+        .input-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        .input-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 8px 10px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        button {
+            background: #f5a623;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 700;
+            color: #333;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            margin-top: 10px;
+            width: 100%;
+        }
+        button:hover {
+            background: #d48806;
+        }
+        #p {
+            margin-top: 25px;
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            background: rgba(255,255,255,0.3);
+            padding: 10px;
+            border-radius: 10px;
+            user-select: all;
+        }
+    </style>
+    <script>
+        function generatePAN() {
+            var v1 = document.getElementById("candidateName").value.trim();
+            var v2 = document.getElementById("fatherName").value.trim();
+            var v3 = document.getElementById("motherName").value.trim();
+            var v4 = document.getElementById("aadharNumber").value.trim();
+            if(v1.length < 4 || v2.length < 1 || v3.length < 1 || v4.length < 12) {
+                alert("Please enter valid inputs: Candidate name (min 4 chars), Father name, Mother name, Aadhar number (12 digits).");
+                return;
+            }
+            var pan = v1.slice(0,4).toUpperCase() + v2.charAt(v2.length-1).toUpperCase() + v3.charAt(v3.length-1).toUpperCase() + v4.slice(8,12);
+            document.getElementById("p").textContent = pan;
+        }
+    </script>
+</head>
+<body>
+    <div class="pan-card">
+        <h1>PAN Card Generator</h1>
+        <div class="input-group">
+            <label for="candidateName">Candidate Name</label>
+            <input type="text" id="candidateName" placeholder="Enter candidate name" />
+        </div>
+        <div class="input-group">
+            <label for="fatherName">Father Name</label>
+            <input type="text" id="fatherName" placeholder="Enter father name" />
+        </div>
+        <div class="input-group">
+            <label for="motherName">Mother Name</label>
+            <input type="text" id="motherName" placeholder="Enter mother name" />
+        </div>
+        <div class="input-group">
+            <label for="aadharNumber">Aadhar Number</label>
+            <input type="text" id="aadharNumber" placeholder="Enter 12-digit Aadhar number" maxlength="12" />
+        </div>
+        <button onclick="generatePAN()">Generate PAN</button>
+        <div id="p"></div>
+    </div>
+</body>
+</html>
